@@ -10,7 +10,8 @@ final class CharactersLoading extends CharactersState {}
 final class CharactersError extends CharactersState {}
 
 final class CharactersData extends CharactersState {
-  final CharactersResponse charactersResponse;
+  final Info info;
+  final List<Character> character;
 
-  CharactersData(this.charactersResponse);
+  CharactersData({required this.info, required this.character});
 }
