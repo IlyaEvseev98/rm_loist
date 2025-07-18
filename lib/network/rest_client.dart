@@ -1,4 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -11,5 +10,11 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String? baseUrl}) = _RestClient;
 
   @GET('/character')
-  Future<CharactersResponse> getCharacters();
+  Future<CharactersResponse> getCharacters(@Query('page') int page);
+
+  @GET('/character')
+  Future<CharactersResponse> fetchCharacters({
+    @Query('page') int? page,
+    @Query('name') String? name,
+  });
 }

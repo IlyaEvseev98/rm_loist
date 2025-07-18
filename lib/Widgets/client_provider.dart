@@ -8,7 +8,6 @@ class ClientProvider extends InheritedWidget {
   final RestClient client;
 
   static ClientProvider of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<ClientProvider>();
     return context.dependOnInheritedWidgetOfExactType<ClientProvider>()!;
   }
 
