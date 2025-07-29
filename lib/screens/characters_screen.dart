@@ -29,7 +29,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
           scrollController.position.pixels != 0) {
         final state = charactersCubit.state;
 
-        if (state is! CharactersLoading &&
+        if (state is! CharactersFirstLoad &&
             state is CharactersData &&
             state.hasMore) {
           charactersCubit.getCharacters();
@@ -80,11 +80,13 @@ class _CharactersScreenState extends State<CharactersScreen> {
           },
           child: BlocBuilder<CharactersCubit, CharactersState>(
             builder: (context, state) {
-              if (state is CharactersLoading) {
-                return Center(
-                  child: LoadingIndicator(
-                    indicatorType: Indicator.circleStrokeSpin,
-                    colors: [Theme.of(context).colorScheme.primary],
+              if (state is CharactersFirstLoad) {
+                return SizedBox(
+                  child: Center(
+                    child: LoadingIndicator(
+                      indicatorType: Indicator.pacman,
+                      colors: [Theme.of(context).colorScheme.primary],
+                    ),
                   ),
                 );
               }
@@ -95,10 +97,14 @@ class _CharactersScreenState extends State<CharactersScreen> {
                   itemCount: state.character.length + (state.hasMore ? 1 : 0),
                   itemBuilder: (BuildContext context, int index) {
                     if (index >= state.character.length) {
-                      return Center(
-                        child: LoadingIndicator(
-                          indicatorType: Indicator.circleStrokeSpin,
-                          colors: [Theme.of(context).colorScheme.primary],
+                      return SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Center(
+                          child: LoadingIndicator(
+                            indicatorType: Indicator.pacman,
+                            colors: [Theme.of(context).colorScheme.primary],
+                          ),
                         ),
                       );
                     }

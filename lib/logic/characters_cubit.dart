@@ -16,11 +16,15 @@ class CharactersCubit extends Cubit<CharactersState> {
 
   Future<void> getCharacters() async {
     if (isLoading ||
-        (state is CharactersData && !(state as CharactersData).hasMore))
+        (state is CharactersData && !(state as CharactersData).hasMore)) {
       return;
+    }
 
     isLoading = true;
-    emit(CharactersLoading());
+
+    if (currentPage == 1) {
+      emit(CharactersFirstLoad());
+    }
 
     try {
       final newCharacters = await client.fetchCharacters(page: currentPage);

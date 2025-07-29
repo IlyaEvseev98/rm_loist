@@ -6,6 +6,19 @@ import 'package:rm_list/network/dio_logger.dart';
 import 'package:rm_list/network/rest_client.dart';
 import 'package:rm_list/screens/characters_screen.dart';
 
+final darkTheme = ThemeData(
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    brightness: Brightness.dark,
+    seedColor: const Color.fromARGB(255, 20, 58, 21),
+    primary: const Color.fromARGB(255, 39, 26, 24),
+  ),
+  textTheme: GoogleFonts.latoTextTheme(),
+  scaffoldBackgroundColor: const Color.fromARGB(255, 20, 58, 21),
+  appBarTheme: AppBarTheme(
+    backgroundColor: const Color.fromARGB(128, 240, 225, 70),
+  ),
+);
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
@@ -27,6 +40,7 @@ void main() {
   runApp(
     MaterialApp(
       theme: theme,
+      darkTheme: darkTheme,
       home: ClientProvider(client: RestClient(dio), child: CharactersScreen()),
     ),
   );
